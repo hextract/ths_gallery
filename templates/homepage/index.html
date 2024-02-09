@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load define_action %}
+
+{% block title %}THS GALLERY{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="text-center fw-bolder">Галерея карт THS:</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors|as_crispy_errors }}
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Выбор класса:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="checkbox" class="form-check-input" id="flexCheckDefault" onClick="toggle(this)"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Выбрать все
+                            </label>
+                            {{ form.classes|as_crispy_field }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Сохранить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.mana|as_crispy_field }}
+                </div>
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.attack|as_crispy_field }}
+                </div>
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.health|as_crispy_field }}
+                </div>
+                <div class="col-md-5 pt-2">
+                    {{ form.search|as_crispy_field }}
+                </div>
+                <div class="col-md-3 pt-2">
+                    <label class="form-label">Выбор класса</label><br>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            Выбор классов
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1 pt-2">
+                    {{ form.amount|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-6">
+                    {{ form.rarity|as_crispy_field }}
+                </div>
+                <div class="col-md-4 col-6">
+                    {{ form.card_type|as_crispy_field }}
+                </div>
+                <div class="col-md-4 ">
+                    {{ form.race|as_crispy_field }}
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-md-6 mx-auto">
+                <label class="form-label"> </label>
+                <button type="submit" class="btn btn-primary mb-3">Поиск по картам</button>
+            </div>
+        </form>
+        <div class="d-grid gap-2 col-md-6 mx-auto">
+            <a href="/" class="btn btn-outline-danger mb-3">Очистить все</a>
+        </div>
+        <h4 class="text-center">Найдено карт: {{ cards|length }}</h4>
+
+        <div class="row justify-content-center">
+            {% for item in cards %}
+
+                {% if forloop.first or item.cl != last_item.cl %}
+                    <hr class="hr hr-blurry"/>
+                    <h2 class="text-center">{{ item.cl.name }}</h2>
+                    <hr class="hr hr-blurry"/>
+                    </div>
+                    <div class="row justify-content-center">
+                {% endif %}
+
+                {% include 'includes/item.html' with item=item %}
+
+                {% define item as last_item %}
+
+            {% endfor %}
+            </div>
+
+    </div>
+
+    <script>
+        function toggle(source) {
+            checkboxes = document.getElementsByName('classes');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+{% endblock %}

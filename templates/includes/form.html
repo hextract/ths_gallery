@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+
+<form method="{{ form_method }}" {{ other_data }}>
+    {% csrf_token %}
+
+    {{ form|crispy }}
+    
+    <div class="d-grid gap-2 col-md-12 mx-auto">
+        <label class="form-label"> </label>
+        <button type="submit" class="btn btn-primary mb-3">{{ button_name }}</button>
+    </div>
+</form>

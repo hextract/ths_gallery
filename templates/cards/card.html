@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Карта{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center fw-bolder">Карта</h1>
+        <form method="post" enctype=multipart/form-data>
+            {% csrf_token %}
+            {{ form.non_field_errors|as_crispy_errors }}
+
+            <div class="row">
+                <div class="col-md-6 pt-2">
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div class="pt-2 col-md-6">
+                    {{ form.image|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.mana|as_crispy_field }}
+                </div>
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.attack|as_crispy_field }}
+                </div>
+                <div class="col-md-1 col-4 pt-2">
+                    {{ form.health|as_crispy_field }}
+                </div>
+                <div class="col-md-2 pt-2">
+                    {{ form.cl|as_crispy_field }}
+                </div>
+                <div class="col-md-2 pt-2">
+                    {{ form.rarity|as_crispy_field }}
+                </div>
+                <div class="col-md-2 pt-2">
+                    {{ form.card_type|as_crispy_field }}
+                </div>
+                <div class="col-md-3 pt-2">
+                    {{ form.race|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.text|as_crispy_field }}
+
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-md-12 mx-auto">
+                <label class="form-label"> </label>
+                <button type="submit" class="btn btn-primary mb-3">Сохранить карту</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

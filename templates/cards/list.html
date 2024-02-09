@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои карты{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            
+        <div class="d-grid mx-auto">
+            <label class="form-label"> </label>
+            <a class="btn btn-outline-primary" href="{% url 'cards:create_card' %}">Новая
+                карта</a>
+        </div>
+        <div class="d-grid mx-auto">
+            <label class="form-label"> </label>
+            <a class="btn btn-outline-primary" href="{% url 'cards:create_card_from_file_step_1' %}">Новая
+                карта из файла</a>
+        </div>
+                <h1 class="text-center fw-bolder">Список карт (Устаревшая часть сайта. Используйте главную страницу)</h1>
+
+                <div class="row justify-content-center">
+                    {% for card in cards %}
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="{{ card.image.url }}"
+                                     alt="{{ card }}"
+                                     class="img-fluid">
+                            </div>
+
+                            <div class="col-10">
+
+                                <h4>{{ card.name }}</h4>
+                                <p class="fs-5">
+                                    ({{ card.mana }}) {% if card.attack %}{{ card.attack }}/{{ card.health }}{% endif %}</p>
+                                <p class="fs-6">{{ card.text }}</p>
+
+                                <a class="btn btn-outline-secondary"
+                                   href="{% url 'cards:edit_card' pk=card.id %}">Редактировать
+                                    карту</a>
+                                <a class="btn btn-outline-danger"
+                                   href="{% url 'cards:delete_card' pk=card.id %}">Удалить
+                                    карту</a>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

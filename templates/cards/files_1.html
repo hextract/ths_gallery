@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Карта{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center fw-bolder">Загрузить карты из файлов</h1>
+            </div>
+        </div>
+        {% include 'includes/form.html' with form_method='post' button_name='Перейти к загрузке карт' other_data="enctype=multipart/form-data" %}
+    </div>
+{% endblock %}

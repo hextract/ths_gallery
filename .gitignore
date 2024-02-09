@@ -18,6 +18,7 @@ old_migrations/
 /intensive_django/media/
 sent_emails/
 static/
+media/
 .vscode/
 .env-prod
 .env-prod.db

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Карта{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center fw-bolder">Голос</h1>
+        <form method="post" enctype=multipart/form-data>
+            {% csrf_token %}
+            {{ form.non_field_errors|as_crispy_errors }}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ card.image.url }}"
+                         alt="{{ card }}"
+                         class="img-fluid">
+                </div>
+                <div class="col-md-8">
+
+                    <div class="row ">
+                        <div class="col-md-2 pt-2">
+                            {{ form.design|as_crispy_field }}
+                        </div>
+                        <div class="pt-2 col-sm-2">
+                            {{ form.balance|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-2 col-4 pt-2">
+                            {{ form.realisation|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-2 col-4 pt-2">
+                            {{ form.mistakes|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-2 col-4 pt-2">
+                            {{ form.idea|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form.comment|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="d-grid gap-2 col-md-12 mx-auto">
+                <label class="form-label"> </label>
+                <button type="submit" class="btn btn-primary mb-3">Сохранить карту</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

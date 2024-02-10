@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load hash %}
+
+{% block title %}Оценки карт{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if stage != 1 %}
+
+                    <li class="page-item"><a class="page-link" href="?stage=1">&laquo; Первый</a></li>
+                    <li class="page-item"><a class="page-link" href="?stage={{ stage|add:"-1" }}">Предыдущий</a></li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <a class="page-link">Раунд {{ stage }} из {{ stages }}</a>
+                </li>
+
+                {% if stage < stages %}
+                    <li class="page-item"><a class="page-link" href="?stage={{ stage|add:"1" }}">Следующий</a></li>
+                    <li class="page-item"><a class="page-link" href="?stage={{ stages }}">Последний &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center fw-bolder">Список карт и оценок к ним</h1>
+
+                <div class="row justify-content-center">
+                    {% for card in cards %}
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="{{ card.image.url }}"
+                                     alt="{{ card }}"
+                                     class="img-fluid">
+                            </div>
+
+                            <div class="col-8">
+
+                                <h3>{{ card.name }}</h3>
+
+
+                                {% if user.can_vote %}
+                                    <a class="btn btn-outline-secondary"
+                                       href="{% url 'vote:new_vote' pk=card.id %}">Оценить карту</a>
+                                {% endif %}
+                                <p class="fs-5">
+                                    Итоговая оценка карты: {{ votes|hash:card.id }} баллов</p>
+                                <p class="fs-6">{{ card.text }}</p>
+
+                                <div class="accordion" id="accordionExample">
+                                    {% for vote in card.votes.all %}
+
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#acc_{{ vote.id }}"
+                                                        aria-expanded="false" aria-controls="acc_{{ vote.id }}">
+                                                    {{ vote.user.get_full_name }} - {{ vote.result }} баллов
+                                                </button>
+                                            </h2>
+                                            <div id="acc_{{ vote.id }}" class="accordion-collapse collapse"
+                                                 data-bs-parent="#accordionExample">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Дизайн</th>
+                                                        <th scope="col">Баланс</th>
+                                                        <th scope="col">Реализация</th>
+                                                        <th scope="col">Ошибки</th>
+                                                        <th scope="col">Идея</th>
+                                                        <th scope="col">Итого</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>{{ vote.design }}/10</td>
+                                                        <td>{{ vote.balance }}/10</td>
+                                                        <td>{{ vote.realisation }}/10</td>
+                                                        <td>{{ vote.mistakes }}/5</td>
+                                                        <td>{{ vote.idea }}/5</td>
+                                                        <td>{{ vote.result }}/45</td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="accordion-body">
+                                                    <p class="fs-5">
+                                                        Комментарий:</p>
+                                                    {{ vote.comment }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

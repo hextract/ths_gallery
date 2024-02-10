@@ -34,7 +34,12 @@
                         <div class="col-sm-2 col-4 pt-2">
                             {{ form.idea|as_crispy_field }}
                         </div>
+                        <div class="col-sm-2 col-4 pt-2">
+                            <label for="result" class="form-label">Итог:</label>
+                            <input class="form-control" type="text" id="result" disabled/>
+                        </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             {{ form.comment|as_crispy_field }}
@@ -51,4 +56,22 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('id_design').onchange =
+            document.getElementById('id_balance').onchange =
+                document.getElementById('id_realisation').onchange =
+                    document.getElementById('id_mistakes').onchange =
+                        document.getElementById('id_idea').onchange =
+                            window.onload = function () {
+            
+            var result = parseInt(document.getElementById('id_design').value) +
+                         parseInt(document.getElementById('id_balance').value) +
+                         parseInt(document.getElementById('id_realisation').value);
+            result = result * (1.0 - parseInt(document.getElementById('id_mistakes').value) / 10);
+            result = result * (1.0 + parseInt(document.getElementById('id_idea').value) / 10);
+            
+            document.getElementById('result').value = Math.floor(result);
+        };
+    </script>
 {% endblock %}

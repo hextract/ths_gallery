@@ -37,7 +37,7 @@ def edit_card(request, pk):
     card = get_object_or_404(Card, pk=pk)
 
     if request.user.is_superuser or card.cl in request.user.classes.all():
-        form = CardForm(request.POST or None, instance=card)
+        form = CardForm(request.POST or None, request.FILES or None, instance=card)
         form.fields['cl'].queryset = get_user_classes(request.user)
 
         context = {

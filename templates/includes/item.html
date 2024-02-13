@@ -33,7 +33,7 @@
                 <h6>Редкость: {{ item.rarity }}</h6>
                 <h6>Тип: {{ item.race }}</h6>
                 {{ item.text }}
-                {% if user.is_staff or item.cl in user.classes.all %}
+                {% if user.is_superuser or item.cl in user.classes.all %}
                     <hr class="hr hr-blurry"/>
                     <a class="btn btn-outline-secondary"
                        href="{% url 'cards:edit_card' pk=item.id %}">Редактировать

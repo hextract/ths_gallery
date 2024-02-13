@@ -1,11 +1,11 @@
 .PHONY: pull
 pull:
-    git pull
+	git pull
 
 .PHONY: update
 update: pull
-    sudo systemctl restart gunicorn
+	sudo systemctl restart gunicorn
 
 .PHONY: activate
 activate:
-    source venv/bin/activate
+	source venv/bin/activate

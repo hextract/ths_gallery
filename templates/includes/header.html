@@ -12,6 +12,10 @@
                 <a class="nav-link {% if request.path == '/' %} fw-bold {% endif %} link-dark "
                    href="{% url 'homepage:home' %}">Главная</a>
             </li>
+            <li>
+                <a class="nav-link {% if request.path == '/vote/' %} fw-bold {% endif %} link-dark "
+                   href="{% url 'vote:list_round' %}">BB24</a>
+            </li>
 
             {% if user.is_authenticated %}
                 <li><a type="button"

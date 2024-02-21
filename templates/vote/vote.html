@@ -71,7 +71,7 @@
             result = result * (1.0 - parseInt(document.getElementById('id_mistakes').value) / 10);
             result = result * (1.0 + parseInt(document.getElementById('id_idea').value) / 10);
             
-            document.getElementById('result').value = Math.floor(result);
+            document.getElementById('result').value = Math.round(result);
         };
     </script>
 {% endblock %}

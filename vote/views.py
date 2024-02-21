@@ -13,7 +13,6 @@ def list_round(request):
         if not stage.shown:
             return render(request, 'vote/hidden.html', context={'stage': stage,
                                                       'stages': stages})
-        stage = stage.id
     else:
         stages = len(Stage.objects.all())
 

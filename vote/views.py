@@ -7,21 +7,20 @@ from vote.models import Vote, VoteCard, Stage
 
 def list_round(request):
     stage = request.GET.get('stage', 1)
+    stage = get_object_or_404(Stage, pk=stage)
     if not request.user.is_authenticated or not request.user.can_vote:
-        stage = get_object_or_404(Stage, pk=stage)
-
         stages = len(Stage.objects.filter(shown=True).all())
         if not stage.shown:
-            return render(request, 'vote/hidden.html', context={'stage': stage.id,
+            return render(request, 'vote/hidden.html', context={'stage': stage,
                                                       'stages': stages})
         stage = stage.id
     else:
         stages = len(Stage.objects.all())
 
-    cards = VoteCard.objects.filter(stage__id=int(stage))
+    cards = VoteCard.objects.filter(stage=stage)
     votes = {card.id: round(sum([i.result for i in card.votes.all()]) / max(1, len(card.votes.all()))) + card.boost for card in cards}
 
-    return render(request, 'vote/list.html', context={'cards': cards, 'stage': int(stage),
+    return render(request, 'vote/list.html', context={'cards': cards, 'stage': stage,
                                                       'stages': stages, 'votes': votes})
 
 

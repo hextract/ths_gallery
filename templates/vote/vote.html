@@ -64,14 +64,14 @@
                     document.getElementById('id_mistakes').onchange =
                         document.getElementById('id_idea').onchange =
                             window.onload = function () {
-            
-            var result = parseInt(document.getElementById('id_design').value) +
-                         parseInt(document.getElementById('id_balance').value) +
-                         parseInt(document.getElementById('id_realisation').value);
-            result = result * (1.0 - parseInt(document.getElementById('id_mistakes').value) / 10);
-            result = result * (1.0 + parseInt(document.getElementById('id_idea').value) / 10);
-            
-            document.getElementById('result').value = Math.round(result);
-        };
+
+                                var result = parseInt(document.getElementById('id_design').value) +
+                                    parseInt(document.getElementById('id_balance').value) +
+                                    parseInt(document.getElementById('id_realisation').value);
+                                result = result * (1.0 - parseInt(document.getElementById('id_mistakes').value) / 10);
+                                result = result * (1.0 + parseInt(document.getElementById('id_idea').value) / 10);
+
+                                document.getElementById('result').value = Math.round(result);
+                            };
     </script>
 {% endblock %}

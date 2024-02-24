@@ -23,7 +23,7 @@ class VoteCard(models.Model):
     name = models.CharField('Название', max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE, verbose_name='Раунд')
 
-    comment = models.TextField(verbose_name='Комментарий')
+    comment = models.TextField(verbose_name='Комментарий', null=True, blank=True)
 
     boost = models.IntegerField(verbose_name='Бонус', default=0)
 

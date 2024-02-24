@@ -23,6 +23,8 @@ class VoteCard(models.Model):
     name = models.CharField('Название', max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE, verbose_name='Раунд')
 
+    comment = models.TextField(verbose_name='Комментарий')
+
     boost = models.IntegerField(verbose_name='Бонус', default=0)
 
     class Meta:
@@ -31,6 +33,16 @@ class VoteCard(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class VoteToken(models.Model):
+    image = models.ImageField(upload_to='vote_tokens')
+    card = models.ForeignKey(VoteCard, on_delete=models.CASCADE,
+                             related_name='tokens')
+
+    class Meta:
+        verbose_name = 'Токен'
+        verbose_name_plural = 'Токены'
 
 
 class Vote(models.Model):

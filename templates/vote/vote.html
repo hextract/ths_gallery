@@ -11,40 +11,58 @@
             {{ form.non_field_errors|as_crispy_errors }}
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <img src="{{ card.image.url }}"
                          alt="{{ card }}"
                          class="img-fluid">
                 </div>
-                <div class="col-md-8">
 
-                    <div class="row ">
-                        <div class="col-sm-2 col-4 pt-2">
-                            {{ form.design|as_crispy_field }}
-                        </div>
-                        <div class="pt-2 col-sm-2 col-4">
-                            {{ form.balance|as_crispy_field }}
-                        </div>
-                        <div class="col-sm-2 col-4 pt-2">
-                            {{ form.realisation|as_crispy_field }}
-                        </div>
-                        <div class="col-sm-2 col-4 pt-2">
-                            {{ form.mistakes|as_crispy_field }}
-                        </div>
-                        <div class="col-sm-2 col-4 pt-2">
-                            {{ form.idea|as_crispy_field }}
-                        </div>
-                        <div class="col-sm-2 col-4 pt-2">
-                            <label for="result" class="form-label">Итог:</label>
-                            <input class="form-control" type="text" id="result" disabled/>
-                        </div>
-                    </div>
-
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-12">
-                            {{ form.comment|as_crispy_field }}
-                        </div>
+                        {% if card.tokens.first %}
+                            <h4 class="fw-bold">Токены:</h4>
+                        {% endif %}
+                        {% for token in card.tokens.all %}
+                            <div class="col-sm-4">
+                                <img src="{{ token.image.url }}"
+                                     alt="{{ token }}"
+                                     class="img-fluid">
+                            </div>
+                        {% endfor %}
                     </div>
+
+                    {% if card.comment %}
+                        <h4 class="fw-bold">Комментарий от автора:</h4>
+                    {% endif %}
+                    <p>{{ card.comment | linebreaks }}</p>
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="col-sm-2 col-4 pt-2">
+                    {{ form.design|as_crispy_field }}
+                </div>
+                <div class="pt-2 col-sm-2 col-4">
+                    {{ form.balance|as_crispy_field }}
+                </div>
+                <div class="col-sm-2 col-4 pt-2">
+                    {{ form.realisation|as_crispy_field }}
+                </div>
+                <div class="col-sm-2 col-4 pt-2">
+                    {{ form.mistakes|as_crispy_field }}
+                </div>
+                <div class="col-sm-2 col-4 pt-2">
+                    {{ form.idea|as_crispy_field }}
+                </div>
+                <div class="col-sm-2 col-4 pt-2">
+                    <label for="result" class="form-label">Итог:</label>
+                    <input class="form-control" type="text" id="result" disabled/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.comment|as_crispy_field }}
                 </div>
             </div>
             <div class="row">

@@ -41,6 +41,41 @@
 
                                 <h3>{{ card.name }}</h3>
 
+                                <div class="accordion" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                    aria-expanded="false" aria-controls="flush-collapseOne">
+                                                От автора карты
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                <div class="row">
+                                                    {% if card.tokens.first %}
+                                                        <h4 class="fw-bold">Токены:</h4>
+                                                    {% endif %}
+                                                    {% for token in card.tokens.all %}
+                                                        <div class="col-sm-4">
+                                                            <img src="{{ token.image.url }}"
+                                                                 alt="{{ token }}"
+                                                                 class="img-fluid">
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+
+                                                {% if card.comment %}
+                                                    <h4 class="fw-bold">Комментарий:</h4>
+                                                {% endif %}
+                                                <p>{{ card.comment | linebreaks }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p></p>
+
 
                                 {% if user.can_vote %}
                                     <a class="btn btn-outline-secondary"
@@ -94,7 +129,7 @@
 
                                                     <p class="fs-5">
                                                         Комментарий:</p>
-                                                    {{ vote.comment |linebreaks }}
+                                                    {{ vote.comment | linebreaks }}
                                                 </div>
                                             </div>
                                         </div>

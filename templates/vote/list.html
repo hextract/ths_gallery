@@ -83,60 +83,67 @@
                                     <a class="btn btn-outline-secondary"
                                        href="{% url 'vote:new_vote' pk=card.id %}">Оценить карту</a>
                                 {% endif %}
-                                <p class="fs-5">
-                                    Итоговая оценка карты: {{ votes|hash:card.id }} баллов</p>
+
+                                {% if stage.shown %}
+                                    <p class="fs-5">
+                                        Итоговая оценка карты: {{ votes|hash:card.id }} баллов</p>
+                                {% endif %}
                                 <p class="fs-6">{{ card.text }}</p>
 
-                                <div class="accordion" id="accordionExample">
-                                    {% for vote in card.votes.all %}
 
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#acc_{{ vote.id }}"
-                                                        aria-expanded="false" aria-controls="acc_{{ vote.id }}">
-                                                    {{ vote.user.get_full_name }} - {{ vote.result }} баллов
-                                                </button>
-                                            </h2>
-                                            <div id="acc_{{ vote.id }}" class="accordion-collapse collapse"
-                                                 data-bs-parent="#accordionExample">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">Дизайн</th>
-                                                            <th scope="col">Баланс</th>
-                                                            <th scope="col">Реализация</th>
-                                                            <th scope="col">Ошибки</th>
-                                                            <th scope="col">Идея</th>
-                                                            <th scope="col">Итого</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>{{ vote.design }}/10</td>
-                                                            <td>{{ vote.balance }}/10</td>
-                                                            <td>{{ vote.realisation }}/10</td>
-                                                            <td>{{ vote.mistakes }}/5</td>
-                                                            <td>{{ vote.idea }}/5</td>
-                                                            <td>{{ vote.result }}/45</td>
-                                                        </tr>
-                                                        <tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                {% if stage.shown %}
+                                    <div class="accordion" id="accordionExample">
+                                        {% for vote in card.votes.all %}
 
-                                                <div class="accordion-body">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#acc_{{ vote.id }}"
+                                                            aria-expanded="false" aria-controls="acc_{{ vote.id }}">
+                                                        {{ vote.user.get_full_name }} - {{ vote.result }} баллов
+                                                    </button>
+                                                </h2>
+                                                <div id="acc_{{ vote.id }}" class="accordion-collapse collapse"
+                                                     data-bs-parent="#accordionExample">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">Дизайн</th>
+                                                                <th scope="col">Баланс</th>
+                                                                <th scope="col">Реализация</th>
+                                                                <th scope="col">Ошибки</th>
+                                                                <th scope="col">Идея</th>
+                                                                <th scope="col">Итого</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>{{ vote.design }}/10</td>
+                                                                <td>{{ vote.balance }}/10</td>
+                                                                <td>{{ vote.realisation }}/10</td>
+                                                                <td>{{ vote.mistakes }}/5</td>
+                                                                <td>{{ vote.idea }}/5</td>
+                                                                <td>{{ vote.result }}/45</td>
+                                                            </tr>
+                                                            <tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="accordion-body">
 
 
-                                                    <p class="fs-5">
-                                                        Комментарий:</p>
-                                                    {{ vote.comment | linebreaks }}
+                                                        <p class="fs-5">
+                                                            Комментарий:</p>
+                                                        {{ vote.comment | linebreaks }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                         </div>

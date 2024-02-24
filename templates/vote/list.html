@@ -84,14 +84,14 @@
                                        href="{% url 'vote:new_vote' pk=card.id %}">Оценить карту</a>
                                 {% endif %}
 
-                                {% if stage.shown %}
+                                {% if stage.shown or user.is_staff %}
                                     <p class="fs-5">
                                         Итоговая оценка карты: {{ votes|hash:card.id }} баллов</p>
                                 {% endif %}
                                 <p class="fs-6">{{ card.text }}</p>
 
 
-                                {% if stage.shown %}
+                                {% if stage.shown or user.is_staff %}
                                     <div class="accordion" id="accordionExample">
                                         {% for vote in card.votes.all %}
 

@@ -16,5 +16,5 @@ class SignInForm(forms.ModelForm):
 
         help_texts = {
             Account.password.field.name: """Можно получить в любом боте арены THS, например <a type="button"
-                       href="https://vk.com/thsbarmen">тут</a>"""
+                       href="https://vk.com/thsbarmen">тут</a> используя команду !вход"""
         }

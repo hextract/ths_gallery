@@ -40,6 +40,9 @@ class VoteToken(models.Model):
     card = models.ForeignKey(VoteCard, on_delete=models.CASCADE,
                              related_name='tokens')
 
+    def __str__(self):
+        return "token: " + self.card.name
+
     class Meta:
         verbose_name = 'Токен'
         verbose_name_plural = 'Токены'

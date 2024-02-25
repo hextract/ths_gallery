@@ -9,17 +9,17 @@
             <ul class="pagination justify-content-center">
                 {% if stage.id != 1 %}
 
-                    <li class="page-item"><a class="page-link" href="?stage=1">&laquo; Первый</a></li>
+                    <li class="page-item"><a class="page-link" href="?stage=1">Первый</a></li>
                     <li class="page-item"><a class="page-link" href="?stage={{ stage.id|add:"-1" }}">Предыдущий</a></li>
                 {% endif %}
 
                 <li class="page-item disabled">
-                    <a class="page-link">Раунд {{ stage.id }} из {{ stages }}</a>
+                    <a class="page-link">{{ stage.id }} из {{ stages }}</a>
                 </li>
 
                 {% if stage.id < stages %}
                     <li class="page-item"><a class="page-link" href="?stage={{ stage.id|add:"1" }}">Следующий</a></li>
-                    <li class="page-item"><a class="page-link" href="?stage={{ stages }}">Последний &raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?stage={{ stages }}">Последний</a></li>
                 {% endif %}
             </ul>
         </nav>

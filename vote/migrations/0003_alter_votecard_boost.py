@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('vote', '0002_alter_stage_options_alter_vote_card'),
     ]

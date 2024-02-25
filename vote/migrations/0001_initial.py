@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -29,7 +28,8 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='vote_cards', verbose_name='Карта')),
                 ('name', models.CharField(max_length=50, verbose_name='Название')),
                 ('boost', models.IntegerField(verbose_name='Бонус')),
-                ('stage', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vote.stage', verbose_name='Раунд')),
+                ('stage',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vote.stage', verbose_name='Раунд')),
             ],
             options={
                 'verbose_name': 'Карта',
@@ -47,8 +47,11 @@ class Migration(migrations.Migration):
                 ('idea', models.IntegerField(verbose_name='Идея')),
                 ('comment', models.TextField()),
                 ('result', models.IntegerField(blank=True, null=True, verbose_name='Итог')),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='votes', to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
-                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes', to='vote.votecard')),
+                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                           related_name='votes', to=settings.AUTH_USER_MODEL,
+                                           verbose_name='Пользователь')),
+                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes',
+                                           to='vote.votecard')),
             ],
             options={
                 'verbose_name': 'Голос',

@@ -17,7 +17,7 @@ def home(request):
                 cards = cards.filter(attack__gte=int(data[0]), attack__lte=int(data[1]))
             else:
                 cards = cards.filter(attack=form.cleaned_data['attack'])
-                
+
         if form.cleaned_data['mana']:
             if '-' in form.cleaned_data['mana']:
                 data = form.cleaned_data['mana'].split('-')

@@ -13,7 +13,8 @@ class MainPageForm(forms.ModelForm):
     card_type = forms.ChoiceField(choices=((i, i) for i in ['Любая'] + CHOICES_TYPE), label='Тип карты', required=False)
 
     classes = forms.ModelMultipleChoiceField(Class.objects.all().order_by('slug'), label='',
-                                        widget=forms.CheckboxSelectMultiple(attrs={'class': "form-check"}),required=False)
+                                             widget=forms.CheckboxSelectMultiple(attrs={'class': "form-check"}),
+                                             required=False)
 
     amount = forms.IntegerField(label='Кол-во:', required=False)
 

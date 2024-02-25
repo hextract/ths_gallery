@@ -1,5 +1,3 @@
-import random
-
 from django import forms
 
 from users.models import Account

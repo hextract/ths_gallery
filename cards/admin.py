@@ -11,4 +11,4 @@ class CardAdmin(admin.ModelAdmin):
 @admin.register(Class)
 class ClassAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
-    filter_horizontal = ('users', )
+    filter_horizontal = ('users',)

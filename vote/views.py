@@ -12,12 +12,13 @@ def list_round(request):
         stages = len(Stage.objects.filter(shown=True).all())
         if not stage.shown:
             return render(request, 'vote/hidden.html', context={'stage': stage,
-                                                      'stages': stages})
+                                                                'stages': stages})
     else:
         stages = len(Stage.objects.all())
 
     cards = VoteCard.objects.filter(stage=stage)
-    votes = {card.id: round(sum([i.result for i in card.votes.all()]) / max(1, len(card.votes.all()))) + card.boost for card in cards}
+    votes = {card.id: round(sum([i.result for i in card.votes.all()]) / max(1, len(card.votes.all()))) + card.boost for
+             card in cards}
 
     return render(request, 'vote/list.html', context={'cards': cards, 'stage': stage,
                                                       'stages': stages, 'votes': votes})

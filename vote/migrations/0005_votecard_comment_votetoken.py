@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('vote', '0004_alter_vote_comment_alter_votecard_boost'),
     ]
@@ -22,7 +21,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='vote_tokens')),
-                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='vote.votecard')),
+                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens',
+                                           to='vote.votecard')),
             ],
         ),
     ]

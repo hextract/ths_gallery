@@ -42,7 +42,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, blank=True, null=True,
                                  verbose_name='Фамилия')
 
-    can_vote = models.BooleanField(default=False, verbose_name='Может голосовать?')
+    can_vote = models.BooleanField(default=True, verbose_name='Может голосовать?')
 
     # Django fields
     is_staff = models.BooleanField(default=False,

@@ -50,6 +50,11 @@ class Card(models.Model):
         self.plain_name = make_plain(self.name)
         self.plain_text = make_plain(self.text)
 
+        if not self.attack:
+            self.attack = None
+        if not self.health:
+            self.health = None
+
         super(Card, self).save(*args, **kwargs)
 
     class Meta:

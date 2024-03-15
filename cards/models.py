@@ -20,6 +20,8 @@ class Class(models.Model):
 
 
 def make_plain(text):
+    if not text:
+        text = ""
     plain = text.lower()
     plain = plain.replace('[b]', '').replace('[/b]', '').replace('[i]', '').replace('[/i]', '')
     plain = "".join([i for i in plain if i not in """,.:;-_»«[]"'!#-_"""])
@@ -31,8 +33,8 @@ class Card(models.Model):
 
     name = models.CharField('Название', max_length=50)
     plain_name = models.CharField('Очищенное название', max_length=50)
-    text = models.CharField('Текст', max_length=1000)
-    plain_text = models.CharField('Очищенный текст', max_length=1000)
+    text = models.CharField('Текст', max_length=1000, null=True, blank=True, default="")
+    plain_text = models.CharField('Очищенный текст', max_length=1000, null=True, blank=True, default="")
 
     mana = models.SmallIntegerField('Мана')
     attack = models.SmallIntegerField('Атака', null=True, blank=True)

@@ -25,6 +25,8 @@ class MainPageForm(forms.ModelForm):
     health = forms.CharField(label='Здоровье', max_length=10, required=False,
                              widget=forms.TextInput(attrs={'placeholder': '1-10'}))
 
+    fast_download = forms.BooleanField(label='Быстрая загрузка по нажатию на карту', required=False)
+
     class Meta:
         model = Card
         fields = ('card_type', 'race', 'rarity')

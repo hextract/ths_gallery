@@ -78,6 +78,9 @@
                     {{ form.race|as_crispy_field }}
                 </div>
             </div>
+            <div class="row justify-content-center">
+                {{ form.fast_download|as_crispy_field }}
+            </div>
             <div class="d-grid gap-2 col-md-6 mx-auto">
                 <label class="form-label"> </label>
                 <button type="submit" class="btn btn-primary mb-3">Поиск по картам</button>
@@ -99,7 +102,7 @@
                     <div class="row justify-content-center">
                 {% endif %}
 
-                {% include 'includes/item.html' with item=item %}
+                {% include 'includes/item.html' with item=item fast_download=form.fast_download.value %}
 
                 {% define item as last_item %}
 

@@ -1,61 +1,70 @@
-<div class="modal fade" id="card{{ item.id }}" tabindex="-1"
-     aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"
-                    id="exampleModalLabel">{{ item.name }}</h5>
-                <button type="button" class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <a href="{{ item.image.url }}"
-                   download class="text-center"><p class="text-center">
-                    Нажмите
-                    на изображение или сюда чтобы скачать</p></a>
-                <div class="row justify-content-center">
-                    <div class="col-10 col-md-5">
-                        <a href="{{ item.image.url }}"
-                           download>
-                            <img src="{{ item.image.url }}"
-                                 alt="{{ item }}" class="img-fluid">
-                        </a>
-                    </div>
+{% if fast_download %}
+        <div class="col-md-2 col-6">
+        <a href="{{ item.image.url }}" download class="btn imgButton">
+            <img src="{{ item.image.url }}"
+                 alt="{{ item }}" class="img-fluid" style="width: 100%">
+        </a>
+    </div>
+{% else %}
+    <div class="modal fade" id="card{{ item.id }}" tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalLabel">{{ item.name }}</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
-                {% if item.attack and item.health %}
-                    <h5>({{ item.mana }})
-                        маны, {{ item.attack }}/{{ item.health }}</h5>
-                {% else %}
-                    <h5>({{ item.mana }}) маны.</h5>
-                {% endif %}
-                <h6>Редкость: {{ item.rarity }}</h6>
-                <h6>Тип: {{ item.race }}</h6>
-                {{ item.text }}
-                {% if user.is_superuser or item.cl in user.classes.all %}
-                    <hr class="hr hr-blurry"/>
-                    <a class="btn btn-outline-secondary"
-                       href="{% url 'cards:edit_card' pk=item.id %}">Редактировать
-                        карту</a>
-                    <a class="btn btn-outline-danger"
-                       href="{% url 'cards:delete_card' pk=item.id %}">Удалить
-                        карту</a>
-                {% endif %}
-            </div>
+                <div class="modal-body">
+                    <a href="{{ item.image.url }}"
+                       download class="text-center"><p class="text-center">
+                        Нажмите
+                        на изображение или сюда чтобы скачать</p></a>
+                    <div class="row justify-content-center">
+                        <div class="col-10 col-md-5">
+                            <a href="{{ item.image.url }}"
+                               download>
+                                <img src="{{ item.image.url }}"
+                                     alt="{{ item }}" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                    {% if item.attack and item.health %}
+                        <h5>({{ item.mana }})
+                            маны, {{ item.attack }}/{{ item.health }}</h5>
+                    {% else %}
+                        <h5>({{ item.mana }}) маны.</h5>
+                    {% endif %}
+                    <h6>Редкость: {{ item.rarity }}</h6>
+                    <h6>Тип: {{ item.race }}</h6>
+                    {{ item.text }}
+                    {% if user.is_superuser or item.cl in user.classes.all %}
+                        <hr class="hr hr-blurry"/>
+                        <a class="btn btn-outline-secondary"
+                           href="{% url 'cards:edit_card' pk=item.id %}">Редактировать
+                            карту</a>
+                        <a class="btn btn-outline-danger"
+                           href="{% url 'cards:delete_card' pk=item.id %}">Удалить
+                            карту</a>
+                    {% endif %}
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Закрыть
-                </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Закрыть
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col-md-2 col-6">
-    <button type="button" class="btn imgButton" data-bs-toggle="modal"
-            data-bs-target="#card{{ item.id }}">
-        <img src="{{ item.image.url }}"
-             alt="{{ item }}" class="img-fluid" style="width: 100%">
-    </button>
-</div>
+    <div class="col-md-2 col-6">
+        <button type="button" class="btn imgButton" data-bs-toggle="modal"
+                data-bs-target="#card{{ item.id }}">
+            <img src="{{ item.image.url }}"
+                 alt="{{ item }}" class="img-fluid" style="width: 100%">
+        </button>
+    </div>
+{% endif %}

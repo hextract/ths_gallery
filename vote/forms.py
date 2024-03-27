@@ -8,7 +8,7 @@ class VoteForm(forms.ModelForm):
     balance = forms.ChoiceField(choices=((i, i) for i in range(0, 11)), label='Баланс')
     idea = forms.ChoiceField(choices=((i, i) for i in range(0, 11)), label='Идея')
 
-    theme_like = forms.ChoiceField(choices=((i, i) for i in range(0, 6)), label='Соответствие теме')
+    theme_like = forms.ChoiceField(choices=((i, i) for i in range(0, 6)), label='Соотв. теме')
     in_game = forms.ChoiceField(choices=((i, i) for i in range(0, 6)), label='Видение в игре')
 
     class Meta:

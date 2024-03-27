@@ -78,16 +78,16 @@
     <script>
         document.getElementById('id_design').onchange =
             document.getElementById('id_balance').onchange =
-                document.getElementById('id_realisation').onchange =
-                    document.getElementById('id_mistakes').onchange =
-                        document.getElementById('id_idea').onchange =
+                document.getElementById('id_idea').onchange =
+                    document.getElementById('id_theme_like').onchange =
+                        document.getElementById('id_in_game').onchange =
                             window.onload = function () {
 
                                 var result = parseInt(document.getElementById('id_design').value) +
                                     parseInt(document.getElementById('id_balance').value) +
-                                    parseInt(document.getElementById('id_realisation').value);
-                                result = result * (1.0 - parseInt(document.getElementById('id_mistakes').value) / 10);
-                                result = result * (1.0 + parseInt(document.getElementById('id_idea').value) / 10);
+                                    parseInt(document.getElementById('id_idea').value);
+                                result = result * (1.0 - parseInt(document.getElementById('id_theme_like').value) / 10);
+                                result = result * (1.0 + parseInt(document.getElementById('id_in_game').value) / 10);
 
                                 document.getElementById('result').value = Math.round(result);
                             };

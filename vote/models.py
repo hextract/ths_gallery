@@ -49,12 +49,12 @@ class VoteToken(models.Model):
 
 
 class Vote(models.Model):
-    mistakes = models.IntegerField(verbose_name='Ошибки')
-    design = models.IntegerField(verbose_name='Дизайн')
+    theme_like = models.IntegerField(verbose_name='Соответствие теме')
+    design = models.IntegerField(verbose_name='Внешний вид')
     balance = models.IntegerField(verbose_name='Баланс')
-    realisation = models.IntegerField(verbose_name='Реализация')
-
     idea = models.IntegerField(verbose_name='Идея')
+
+    in_game = models.IntegerField(verbose_name='Видение в игре')
 
     comment = models.TextField(verbose_name='Комментарий')
 
@@ -67,7 +67,7 @@ class Vote(models.Model):
 
     def save(self, *args, **kwargs):
         self.result = round((int(self.design) + int(self.balance) +
-                             int(self.realisation)) * (1.0 + int(self.idea) / 10)) * (1.0 - int(self.mistakes) / 10)
+                             int(self.idea)) * (1.0 + int(self.in_game) / 10)) * (1.0 - int(self.theme_like) / 10)
         super(Vote, self).save(*args, **kwargs)
 
     class Meta:

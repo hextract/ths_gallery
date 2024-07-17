@@ -128,3 +128,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_TRUSTED_ORIGINS').split(' ')

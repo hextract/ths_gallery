@@ -133,3 +133,7 @@ LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
 
 CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_TRUSTED_ORIGINS').split(' ')
+
+CORS_ALLOWED_ORIGINS = [
+    "https://h4x4d.github.io"
+]

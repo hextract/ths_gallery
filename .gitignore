@@ -6,6 +6,8 @@ __pycache__/
 .env
 db.sqlite3
 
+c_cards/
+
 venv/
 env/
 virtualvenv/
@@ -15,7 +17,6 @@ sort_imports.py
 change_quotes.py
 
 old_migrations/
-/intensive_django/media/
 sent_emails/
 static/
 media/

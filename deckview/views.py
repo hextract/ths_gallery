@@ -18,5 +18,6 @@ def main(request):
         response = HttpResponse(content_type='image/png')
         im.save(response, "PNG")
         return response
-    except:
+    except Exception as e:
+        print("\n\n\n\n\n______ERROR_____\n\n\n\n", e)
         return HttpResponseNotFound('insufficient code')

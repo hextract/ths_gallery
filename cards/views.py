@@ -17,7 +17,7 @@ def get_user_classes(user):
 def list_of_cards(request):
     my_classes = get_user_classes(request.user)
 
-    cards = Card.objects.filter(cl__in=my_classes).order_by('-id').all()
+    cards = Card.objects.filter(cl__in=my_classes).order_by('-id').all()[:10]
 
     return render(request, 'cards/list.html', context={'cards': cards})
 

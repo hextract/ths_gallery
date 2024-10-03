@@ -28,7 +28,7 @@
                             <a href="{{ item.image.url }}"
                                download>
                                 <img src="{{ item.image.url }}"
-                                     alt="{{ item }}" class="img-fluid">
+                                     alt="{{ item }}" loading="lazy"  class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
     <div class="col-md-2 col-6">
         <button type="button" class="btn imgButton" data-bs-toggle="modal"
                 data-bs-target="#card{{ item.id }}">
-            <img src="{{ item.image.url }}"
+            <img src="{{ item.image.url }}" loading="lazy" 
                  alt="{{ item }}" class="img-fluid" style="width: 100%">
         </button>
     </div>

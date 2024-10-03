@@ -109,7 +109,7 @@ def create_card_from_file_step_1(request):
                 'cl_id': int(form.cleaned_data['cl']),
 
                 'rarity': RARITIES[data['Rarity']],
-                'card_type': CARD_TYPES[data['Type']],
+                'card_type': CARD_TYPES[data['Type'].split('_')[0]],
                 'race': data['Tribe'].lower(),
 
                 'mana': data['Cost']['Value'],

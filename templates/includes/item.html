@@ -1,5 +1,5 @@
 {% if fast_download %}
-        <div class="col-md-2 col-6">
+    <div class="col-md-2 col-6">
         <a href="{{ item.image.url }}" download class="btn imgButton">
             <img src="{{ item.image.url }}"
                  alt="{{ item }}" class="img-fluid" style="width: 100%">
@@ -28,7 +28,7 @@
                             <a href="{{ item.image.url }}"
                                download>
                                 <img src="{{ item.image.url }}"
-                                     alt="{{ item }}" loading="lazy"  class="img-fluid">
+                                     alt="{{ item }}" loading="lazy" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -39,32 +39,45 @@
                         <h5>({{ item.mana }}) маны.</h5>
                     {% endif %}
                     <h6>Редкость: {{ item.rarity }}</h6>
-                    <h6>Тип: {{ item.race }}</h6>
+                    {% if item.race %}
+                        <h6>Тип: {{ item.race }}</h6>
+                    {% endif %}
                     {{ item.text }}
                     {% if user.is_superuser or item.cl in user.classes.all %}
                         <hr class="hr hr-blurry"/>
                         <a class="btn btn-outline-secondary"
-                           href="{% url 'cards:edit_card' pk=item.id %}">Редактировать
+                           href="{% url 'cards:edit_card' pk=item.id %}" target="_blank">Редактировать
                             карту</a>
-                        <a class="btn btn-outline-danger"
-                           href="{% url 'cards:delete_card' pk=item.id %}">Удалить
-                            карту</a>
+                        <button class="btn btn-outline-danger btn-delete-card" id="{{ item.id }}"
+                           >Удалить
+                            карту</button>
                     {% endif %}
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
+                    <button type="button" class="btn btn-secondary" id="{{ item.id }}-close"
                             data-bs-dismiss="modal">Закрыть
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-2 col-6">
+    <div class="col-md-2 col-6" id="card-{{ item.id }}" >
         <button type="button" class="btn imgButton" data-bs-toggle="modal"
                 data-bs-target="#card{{ item.id }}">
-            <img src="{{ item.image.url }}" loading="lazy" 
+            <img src="{{ item.image.url }}" loading="lazy"
                  alt="{{ item }}" class="img-fluid" style="width: 100%">
         </button>
     </div>
+
+    <script>
+    document.getElementById("{{ item.id }}").addEventListener("click", async function (event){
+        event.preventDefault()
+        await fetch(
+            "/cards/delete/{{ item.id }}/"
+        )
+        document.getElementById("{{ item.id }}-close").click()
+        document.getElementById("card-{{ item.id }}").style.display = "none"
+    })
+    </script>
 {% endif %}

@@ -15,7 +15,11 @@ class GRequestsDownloader:
                     response = requests.get(save_url)
                     photo.write(response.content)
                 except:
-                    download_from_wiki(slug, name)
+                    try:
+                        download_from_wiki(slug, name)
+                    except:
+                        response = requests.get(save_url)
+                        photo.write(response.content)
 
     def get_and_save_photos(self, responses, cards):
         for response, card in zip(responses, cards):

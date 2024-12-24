@@ -6,8 +6,7 @@ from image_creator import create_picture
 
 def main(request):
     try:
-        deck_code = request.GET.get('code')
-
+        deck_code = request.GET.get('code').replace(" ", '+')
         im = async_to_sync(create_picture)(deck_code)
 
         if im is None:

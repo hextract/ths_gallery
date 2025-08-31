@@ -10,7 +10,6 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('cards/', include('cards.urls')),
     path('vote/', include('vote.urls')),
-    path('deckview/', include('deckview.urls')),
 ]
 
 handler404 = 'core.views.handler_404'

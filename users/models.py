@@ -70,3 +70,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+
+class SignInCode(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
+    digest = models.CharField(max_length=64, unique=True)
+    expires_at = models.DateTimeField()
